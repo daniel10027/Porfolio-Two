@@ -117,6 +117,34 @@
         <script src="{% static 'me/js/bootstrap.min.js' %}"></script>
         <!-- Custom Js -->
         <script src="{% static 'me/js/custom.js' %}"></script>
+
+        
+<script>
+	console.log("Hello world")    
+    
+    <script>
+
+        document.querySelector("comment-form").addEventListener("click", event => {
+            event.preventDefault();
+
+            let formData = new FormData();
+            formData.append('nom', document.querySelector("#nom").value);
+            formData.append('article', document.querySelector("#article").value);
+            formData.append('commentaire', document.querySelector("#commentaire").value);
+
+            let csrfTokenValue = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            console.log(formData)
+            
+            const request = new Request('{% url "commentaires" %}', {
+                method: 'POST',
+                body: formData,
+                headers: {'X-CSRFToken': csrfTokenValue}
+            });
+            fetch(request)
+                .then(response => response.json())
+        })
+        </script>
+</script>
     </body>
 
 <!-- Mirrored from hasnaanajmi.com/env/Evet/blog.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Mar 2022 09:14:22 GMT -->

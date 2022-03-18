@@ -89,6 +89,14 @@ class Article(models.Model):
          
             
             })
+        
+    @property
+    def image_1(self):
+        return 'https://drive.google.com/uc?export=view&id={}'.format(self.image)
+    
+    @property
+    def image_3(self):
+        return 'https://drive.google.com/uc?export=view&id={}'.format(self.image_2)
     # TODO: Define custom methods here
 
 

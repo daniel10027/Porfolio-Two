@@ -45,34 +45,10 @@
             <div class="loading-inner">
             </div>
         </div>
-
-        <!-- ========== End Loading ========== -->
-		
-		<!-- ========== Start Color Switcher ========== -->
-        
-        <div class="switch-button"><i class="fa fa-cog fa-spin"></i></div>
-        <div class="switched-styles">
-            <h4>Color Switcher</h4>
-            <ul class="list-unstyled">
-                <li data-color="gold"></li>
-                <li data-color="yellow"></li>
-                <li data-color="orange"></li>
-                <li data-color="green"></li>
-                <li data-color="red"></li>
-                <li data-color="blue"></li>
-                <li data-color="purble"></li>
-                <li data-color="rose"></li>
-            </ul>
-            <div class="hide-button">&times;</div>
-        </div>
-        
-        <!-- ========== End Color Switcher ========== -->
-        
-        <!-- ========== Start Navbar ========== -->
 	
 		<div class="vertical-nav">
 			<!-- Logo -->
-			<a class="logo" href="#">DG</a>
+			<a class="logo" href="{% url 'home' %}">DG</a>
 		    <!-- Toggle Menu -->
 			<button class="toggle-menu">
 				<span class="bar"></span>
@@ -112,6 +88,22 @@
 									<div class="home-text">
 										<p>{{me.poste | capfirst }}</p>
 									</div>
+									<div>
+										{% if messages %}
+										<ul class="messages">
+										  {% for message in messages %}
+											  <div class="container-fluid p-0">
+												<div class="alert alert-success alert-dismissible" role="alert" >
+												  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+													<span aria-hidden="True">&times;</span>
+												  </button>
+												  {{ message }}
+												</div>
+											  </div>
+										  {% endfor %}
+										</ul>
+								  {% endif %}
+									</div>
 									<ul class="social-icons list-unstyled">
 										<li>
 											<a target="blank" href="{{me.facebook}}">
@@ -129,7 +121,7 @@
 											</a>
 										</li>
 									</ul>
-									<a href="#" class="main-btn d-none d-sm-block">Contactez moi</a>
+									<a href="#contact" class="main-btn d-sm-block">Contactez moi</a>
 								</div>
 							</div>
 						</div>
@@ -151,7 +143,7 @@
 					<div class="row">
 						<div class=" col-xl-5 col-lg-6">
 							<div class="about-image">
-								<img class="img-fluid" src="{% static 'me/images//about.jpg' %}" alt="">
+								<img class="img-fluid" src="{{me.photo}}" height="654px" width="540px" alt="">
 							</div>
 						</div>
 						<div class=" col-xl-7 col-lg-6">
@@ -335,7 +327,7 @@
 						<div class="post">
 							<!-- Post Image -->
 							<div class="post-img">
-								<img src="{% static 'me/images//blog/1.jpg' %}" class="img-fluid" alt="">
+								<img src="{{article.image_1}}" height="560px" width="800px" class="img-fluid" alt="">
 							</div>
 							<!-- Post Content -->
 							<div class="post-content">
@@ -367,8 +359,8 @@
 			<section id="contact">
 				<div class="contact container">
 					<div class="main-title">
-						<h3>Get In Touch</h3>
-						<h2>Contact Me</h2>
+						<h3>Entrer en contact</h3>
+						<h2>Contactez moi</h2>
 					</div>
 					<div class="row">
 						<div class="col-lg-4 offset-lg-0 col-md-10 offset-md-1">
@@ -377,45 +369,49 @@
 									<span class="icon-box"><i class="flaticon-location"></i></span>
 									<h4 class="title-box">Location</h4>
 									<div class="content-box">
-										<p>NewYork, USA</p>
-										<p>10 Street Name</p>
+										<p>{{me.localite | capfirst}}</p>
+									
 									</div>
 								</div>
 								<div class="contact-box two">
 									<span class="icon-box"><i class="flaticon-email"></i></span>
 									<h4 class="title-box">Email</h4>
 									<div class="content-box">
-										<p><a href="https://hasnaanajmi.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d381b2a9b2bda0bebaa7bb93babdb5bca0fdb0bcbe">[email&#160;protected]</a></p>
-										<p><a href="https://hasnaanajmi.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="99caece9e9f6ebedd9fce1f8f4e9f5fcb7faf6f4">[email&#160;protected]</a></p>
+										<p><a href="#" class="__cf_email__" >{{me.email_1}}</a></p>
+										<p><a href="#" class="__cf_email__" >{{me.email_2}}</a></p>
 									</div>
 								</div>
 								<div class="contact-box">
 									<span class="icon-box"><i class="flaticon-call"></i></span>
-									<h4 class="title-box">Phone</h4>
+									<h4 class="title-box">Téléphone</h4>
 									<div class="content-box">
-										<p>+1 212 451-4127</p>
-										<p>+1 212 658-2581</p>
+										<p>{{me.telephone_1}}</p>
+										<p>{{me.telephone_1}}</p>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="col-lg-8 offset-lg-0 col-md-10 offset-md-1">
-							<form class="contact-form" action="https://hasnaanajmi.com/env/Evet/mail.php" method="post">
+							<form class="" action="{% url 'contact' %}" method="post">
+								{% csrf_token %}
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Name" id="name" name="name" required>
+									<input type="text" class="form-control" placeholder="Nom" id="name" name="nom" required>
+								</div>
+								<div class="form-group">
+									<input type="tel" class="form-control" placeholder="Contact" id="email" name="contact" required>
 								</div>
 								<div class="form-group">
 									<input type="email" class="form-control" placeholder="Email" id="email" name="email" required>
 								</div>
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Subject" id="subject" name="subject" required>
+									<input type="text" class="form-control" placeholder="Sujet" id="objet" name="objet" required>
 								</div>
 								<div class="form-group">
 									<textarea class="form-control" placeholder="Your Message" id="message" name="message" required></textarea>
 								</div>
-								<!-- Button Send Message -->
-								<button class="contact-btn main-btn" type="submit" name="send">Send Message</button>
-								<!-- Form Message  -->
+								
+								<button class="contact-btn main-btn" type="submit" >Envoyer</button>
+								
 							    <div class="form-message text-center"><span></span></div>
 							</form> 
 						</div>

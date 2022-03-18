@@ -1,6 +1,12 @@
 from django.shortcuts import render
 from django.views.generic import CreateView, ListView, UpdateView, View, DetailView
-from .models import CategorieArticle, Article
+from .models import CategorieArticle, Article, Commentaire
+import json
+from django.db import IntegrityError
+from django.http import JsonResponse
+from django.shortcuts import HttpResponse, HttpResponseRedirect, render
+from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
 
 
 class ArticleListView(ListView):
@@ -64,5 +70,21 @@ class  ArticleDetailView(DetailView):
             context['state'] = True
             return context
 
+@csrf_exempt
+def Comment(request):
+    response_data = {}
+    nom = request.POST.get('nom')
+    article = request.POST.get('article')
+    commentaire = request.POST.get('commentaire')
 
+    response_data['nom'] = nom
+    response_data['commentaire'] = commentaire
+    print(response_data)
 
+    commentaire.objects.create(
+            article=article,
+            nom = nom,
+            commentaire = commentaire,
+    )
+    return JsonResponse(response_data)
+    

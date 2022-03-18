@@ -1,6 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 from blog.models import CategorieArticle, Article
+from django.http import Http404
+from .forms import ContactForm
+from django.core.mail import send_mail, BadHeaderError
+from django.contrib import messages
+from django.http import HttpResponse, HttpResponseRedirect
+
+
+
+import json
+from django.db import IntegrityError
+from django.http import JsonResponse
+from django.shortcuts import HttpResponse, HttpResponseRedirect, render
+from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 def Home(request):
@@ -16,3 +30,34 @@ def Home(request):
            
                }
     return render(request, 'index.html', context)
+
+def Contact(request):
+
+    if request.method == 'GET':
+        form = ContactForm()
+        context = {'form': form, "ms":False }
+    else:
+        
+        form = ContactForm(request.POST)
+        context = { 'form': form, "ms":True }
+        if form.is_valid():
+            nom = form.cleaned_data['nom']
+            contact = form.cleaned_data['contact']
+            email = form.cleaned_data['email']
+            objet = form.cleaned_data['objet']
+            message = form.cleaned_data['message']
+            s_email = Me.objects.last()
+            sujet = 'Message de ' + nom + ' Contact : ' + contact + ' Email : ' + email + ' Objet : ' + objet
+            try:
+                send_mail(sujet, message, s_email.email_1 , [s_email.email_1])
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            messages.success(request, "Merci votre méssage a bien été envoyé .\n Nous vous recontacterons dans les plus bref délais" )
+            return redirect('home')
+        
+        
+@csrf_exempt
+def commentaire(request):
+    data = json.loads(request.body)
+    print(data)
+    return JsonResponse({"Success" : f"Message envoyé"}, status=200)

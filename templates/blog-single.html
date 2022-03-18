@@ -13,7 +13,7 @@
 							<div class="post">
 								<!-- Post Image -->
 								<div class="post-img">
-									<img src="{% static 'me/images/blog/1.jpg' %}" class="img-fluid" alt="">
+									<img src="{{object.image_1}}" height="560px" width="800px" class="img-fluid" alt="">
 								</div>
 								<!-- Post Content -->
 								<div class="post-content">
@@ -28,7 +28,7 @@
 										<div class="row">
 											<div class="col-sm-6 col-xs-12">
 												<div class="image">
-													<img src="{% static 'me/images/blog/5.jpg' %}" class="img-fluid" alt="">
+													<img src="{{object.image_3}}"   height="560px" width="800px" class="img-fluid" alt="">
 												</div>
 											</div>
 											<div class="col-sm-6 col-xs-12">
@@ -72,30 +72,31 @@
 								{% endfor %}
 									
 									<div class="post-form">
+
 										<h3>Laissez un commentaire</h3>
-										<form action="#" method="post">
+										
+										<form  method="post"  id="comment-form">
+											{% csrf_token %}
 											<div class="row">
-												<div class="col-sm-6 col-xs-12">
+												<div class="col-sm-12 col-xs-12">
 													<div class="form-group">
-														<input type="text" class="form-control" name="name" placeholder="Name" required>
+														<input type="text" class="form-control" id="nom" name="nom" placeholder="Nom Complet" required>
+														<input type="hidden" class="form-control" id="article" name="article" value="{{object.id}}" required>
 													</div>
 												</div>
-												<div class="col-sm-6 col-xs-12">
+												
+												<div class="col-sm-12 col-xs-12">
 													<div class="form-group">
-														<input type="email" class="form-control" name="email" placeholder="Email" required>
+														<textarea class="form-control" id="commentaire" name="message" placeholder="Votre commentaire" required></textarea>
 													</div>
 												</div>
 												<div class="col-sm-12 col-xs-12">
-													<div class="form-group">
-														<textarea class="form-control" name="message" placeholder="Your Comment" required></textarea>
-													</div>
-												</div>
-												<div class="col-sm-12 col-xs-12">
-													<button class="main-btn" type="submit" name="comment">Submit Comment</button>
+													<button class="main-btn" type="submit" name="comment">Envoyer</button>
 												</div>
 											</div>
 										</form>
 									</div>
+									<div id="success" class="posts"></div>
 								</div>
 							</div>
 						</div>
@@ -103,7 +104,8 @@
 					<div class="col-lg-4 col-sm-12">
 						<div class="blog-sidebar">
 							<div class="sidebar-search">
-								<form action="#" method="post">
+								<form id="comment-form">
+									
 									<div class="form-group">
 										<input type="search" class="form-control" name="search-field" placeholder="Search.." required>
 										<button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
@@ -132,7 +134,7 @@
 
 								<div class="post-inner">
 									<div class="post-image">
-										<img class="img-fluid" src="{% static 'me/images/blog/2.jpg' %}" alt>
+										<img class="img-fluid" src="{{object.image_1}}" height="560px" width="800px" alt>
 									</div>
 									<div class="post-info">
 										<h5><a href="{{t.url}}">{{t.titre | capfirst}}</a></h5>
@@ -153,5 +155,5 @@
         </div>
         
         <!-- ========== End Blog single ========== -->
-        
+       
 {% endblock content %}
