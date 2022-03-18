@@ -1,0 +1,123 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<!-- Mirrored from hasnaanajmi.com/env/Evet/blog.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Mar 2022 09:14:22 GMT -->
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Evet - Personal Portfolio">
+        <meta name="keywords" content="Html, Css, jQuery, JavaScript, Evet, responsive, onepage, personal, Portfolio, design, creative, template">
+        
+        <!-- Title -->
+        <title>Evet - Personal Portfolio</title>
+        <!-- Favicon --> 
+        <link rel="icon" href="{% static 'me/images/icon.png' %}">
+        <!-- Google Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600,800">
+                
+        <!-- Font Awesome Css -->
+        <link rel="stylesheet" href="{% static 'me/css/font-awesome.min.css' %}">
+		<!-- Flaticon -->
+        <link rel="stylesheet" href="{% static 'me/fonts/flaticon.css' %}">
+        <!-- Bootstrap 4 Css -->
+        <link rel="stylesheet" href="{% static 'me/css/bootstrap.min.css' %}">
+        <!-- Main Style Css -->
+        <link rel="stylesheet" href="{% static 'me/css/main.css' %}">
+		<!-- Inner Pages Style Css -->
+        <link rel="stylesheet" href="{% static 'me/css/inner-pages.css' %}">
+		<!-- Colors Css -->
+        <link rel="stylesheet" href="{% static 'me/css/colors/gold_color.css' %}">
+        
+        <!--[if lt IE 9]>
+        <script src="{% static 'js/html5shiv.min.js' %}"></script>
+        <script src="{% static 'js/respond.min.js' %}"></script>
+        <![endif]-->
+       
+    </head>
+    <body>
+        
+        <!-- ========== Start Loading ========== -->
+        
+        <div class="preloader">
+            <div class="loading-inner">
+            </div>
+        </div>
+
+        <!-- ========== End Loading ========== -->
+		
+		<!-- ========== Start Color Switcher ========== -->
+        
+        <div class="switch-button"><i class="fa fa-cog fa-spin"></i></div>
+        <div class="switched-styles">
+            <h4>Color Switcher</h4>
+            <ul class="list-unstyled">
+                <li data-color="gold"></li>
+                <li data-color="yellow"></li>
+                <li data-color="orange"></li>
+                <li data-color="green"></li>
+                <li data-color="red"></li>
+                <li data-color="blue"></li>
+                <li data-color="purble"></li>
+                <li data-color="rose"></li>
+            </ul>
+            <div class="hide-button">&times;</div>
+        </div>
+        
+        <!-- ========== End Color Switcher ========== -->
+        
+        <!-- ========== Start Page Title ========== -->
+
+        <div class="page-title" id="page-title">
+				<div class="container">
+				<div class="content">
+					
+                    {% if state %}
+
+                    <h2>{{object.titre | capfirst}}</h2>
+
+                    {% else %}
+
+                    <h2>Bienvenue sur le Blog</h2>
+                        
+                    {% endif %}
+                        
+					<ul class="list-unstyled">
+						<li><a href="{% url 'home' %}">Accueil</a></li>
+						<li>Blog</li>
+					</ul>
+				</div>
+			</div>
+        </div>
+
+        <!-- ========== End Page Title ========== -->
+		
+		<!-- ========== Start Blog ========== -->
+        
+			{% block content %}
+            
+            
+            {% endblock content %}
+
+
+            
+
+			<!-- ========== End Blog ========== -->
+        
+        <!-- ========== Js ========== -->
+
+        <!-- jQuery -->
+        <script src="{% static 'me/js/jquery-3.2.1.min.js' %}"></script>
+        <!-- Popper Js  -->
+    	<script src="{% static 'me/js/popper.min.js' %}"></script>
+        <!-- Bootstrap 4 Js -->
+        <script src="{% static 'me/js/bootstrap.min.js' %}"></script>
+        <!-- Custom Js -->
+        <script src="{% static 'me/js/custom.js' %}"></script>
+    </body>
+
+<!-- Mirrored from hasnaanajmi.com/env/Evet/blog.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Mar 2022 09:14:22 GMT -->
+</html>

@@ -1,0 +1,70 @@
+.main-title h2:after,
+.vertical-nav .logo,
+.vertical-nav .toggle-menu .bar,
+.about-me .about-info h3:before,
+.skills .progress-container .progress .progress-bar,
+.portfolio .portfolio-content .item .overlay .item-category span:before,
+.blog .post .post-content .post-date,
+.blog .post .post-content .post-more:hover {
+	background-color: #c79864;
+}
+
+.main-btn:hover,
+.vertical-nav .copyright a,
+.vertical-nav .copyright i,
+.home .home-intro .social-icons li a:hover
+.services .service .service-icon i:before,
+.resume .resume-item h5,
+.portfolio .list-filter li.active,
+.blog .post .post-content .post-title h4:hover,
+.contact .contact-box .icon-box i:before,
+.page-title .content ul li a,
+.blog .post .post-content .more-details blockquote i,
+.blog .post .post-content .post-footer .post-share ul li a:hover,
+.blog .post .post-content .post-footer .post-tags ul li a:hover,
+.blog .post .post-content .post-comment .reply-btn,
+.blog .blog-sidebar .sidebar-search .search-btn,
+.blog .blog-sidebar .categories-list li a span,
+.blog .blog-sidebar .categories-list li a:hover,
+.blog .blog-sidebar .sidebar-posts .post-info h5 a:hover,
+.blog .blog-sidebar .archives-list li a:hover,
+.blog .blog-sidebar .tags-list li a:hover {
+    color: #c79864;
+}
+
+.services .service:hover,
+.contact .contact-box.two,
+.contact .contact-box:hover,
+.contact .contact-form .form-group .form-control:focus,
+.blog .post .post-content .post-form .form-control:focus,
+.blog .blog-sidebar .sidebar-search .form-control:focus {
+	border: 1px solid #c79864;
+}
+
+.preloader .loading-inner,
+.preloader .loading-inner:before,
+.preloader .loading-inner:after {
+	border-top-color: #c79864;
+}
+
+.main-btn {
+    background-color: #c79864;
+    border: 1px solid #c79864;
+}
+
+.home .home-intro .social-icons li a,
+.blog .post .post-content .post-footer .post-share ul li a {
+    border: 1px solid #c79864;
+    -webkit-text-stroke: 1px #c79864;
+}
+
+.skills .progress-container .percent,
+.blog .post .post-content .post-more {
+    color: #c79864;
+    border: 1px solid #c79864;
+}
+
+.skills .progress-container .percent:before {
+	border: 1px solid #c79864;
+	border-color: transparent #c79864 #c79864 transparent;
+}

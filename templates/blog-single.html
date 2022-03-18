@@ -1,0 +1,157 @@
+{% extends 'components/base.html' %}
+{% load static %}
+{% block content %}
+            
+		
+		<!-- ========== Start Blog single ========== -->
+        
+        <div class="blog" id="blog">
+            <div class="container">
+				<div class="row">
+					<div class="col-lg-8 col-sm-12">
+						<div class="blog-single">
+							<div class="post">
+								<!-- Post Image -->
+								<div class="post-img">
+									<img src="{% static 'me/images/blog/1.jpg' %}" class="img-fluid" alt="">
+								</div>
+								<!-- Post Content -->
+								<div class="post-content">
+									<div class="post-title">
+										<a href="#"><h4>{{object.titre | capfirst}}</h4></a>
+									</div>
+									<div class="post-text">
+									<p>{{object.description | safe }}</p>
+
+									</div>
+									<div class="more-details">
+										<div class="row">
+											<div class="col-sm-6 col-xs-12">
+												<div class="image">
+													<img src="{% static 'me/images/blog/5.jpg' %}" class="img-fluid" alt="">
+												</div>
+											</div>
+											<div class="col-sm-6 col-xs-12">
+												<p>{{object.section_1 | safe }}</p>
+
+												</div>
+										</div>
+										<p>{{object.section_2 | safe }}</p>	
+										<blockquote>
+											<i class="flaticon-right-quote"></i>
+											<p>{{object.accroche | safe }}</p>	
+										</blockquote>
+										<p>{{object.section_3 | safe }}</p>	
+										</div>
+									<ul class="post-info list-unstyled">
+										<li class="pull-left">by: <span>Razan Smith</span></li>
+									</ul>
+									<div class="post-date"><span>23</span>Dec</div>
+								
+
+								{% for comment in  object.comments %}
+								<div class="post-comments">
+									<h3>{{forloop.counter}}</h3>
+									<div class="post-comment">
+										<div class="row">
+											<div class="col-sm-2">
+												<div class="comment-image">
+													<img src="{% static 'me/images/comments/1.jpg' %}" class="img-fluid" alt="">
+												</div>
+											</div>
+											<div class="col-sm-10">
+												<h4>{{comment.nom | capfirst}}</h4>
+												<span>{{comment.created}}</span>
+
+												<p>{{comment.commentaire | safe }}</p>
+											</div>
+										</div>
+									</div>
+								
+								</div>
+								{% endfor %}
+									
+									<div class="post-form">
+										<h3>Laissez un commentaire</h3>
+										<form action="#" method="post">
+											<div class="row">
+												<div class="col-sm-6 col-xs-12">
+													<div class="form-group">
+														<input type="text" class="form-control" name="name" placeholder="Name" required>
+													</div>
+												</div>
+												<div class="col-sm-6 col-xs-12">
+													<div class="form-group">
+														<input type="email" class="form-control" name="email" placeholder="Email" required>
+													</div>
+												</div>
+												<div class="col-sm-12 col-xs-12">
+													<div class="form-group">
+														<textarea class="form-control" name="message" placeholder="Your Comment" required></textarea>
+													</div>
+												</div>
+												<div class="col-sm-12 col-xs-12">
+													<button class="main-btn" type="submit" name="comment">Submit Comment</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-sm-12">
+						<div class="blog-sidebar">
+							<div class="sidebar-search">
+								<form action="#" method="post">
+									<div class="form-group">
+										<input type="search" class="form-control" name="search-field" placeholder="Search.." required>
+										<button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
+									</div>
+								</form>
+							</div>
+							<div class="sidebar-categories">
+								<h4>Categories</h4>
+								<ul class="categories-list list-unstyled">
+									
+									{% for categorie in categories %}
+
+									<li>
+										<a href="#">{{categorie.titre | capfirst }} <span>{{categorie.article }}</span></a>
+									</li>
+									
+									{% endfor %}
+								
+								</ul>
+							</div>
+							<div class="sidebar-posts">
+								<h4>Dernier message</h4>
+
+								{% for t in trois  %}
+
+
+								<div class="post-inner">
+									<div class="post-image">
+										<img class="img-fluid" src="{% static 'me/images/blog/2.jpg' %}" alt>
+									</div>
+									<div class="post-info">
+										<h5><a href="{{t.url}}">{{t.titre | capfirst}}</a></h5>
+										<p>{{t.created}}</p>
+									</div>
+								</div>
+								
+								
+								{% endfor %}
+								
+								
+							</div>
+						
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>
+        
+        <!-- ========== End Blog single ========== -->
+        
+{% endblock content %}

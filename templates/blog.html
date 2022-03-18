@@ -1,0 +1,46 @@
+{% extends 'components/base.html' %}
+{% load static %}
+{% block content %}
+            
+		<!-- ========== Start Blog ========== -->
+        
+			<div class="blog" id="blog">
+				<div class="container">
+					<div class="row">
+						
+						
+					{% for article in articles  %}
+
+
+							<!-- New Item -->
+							<div class="col-md-6">
+								<div class="post">
+									<!-- Post Image -->
+									<div class="post-img">
+										<img src="{% static 'me/images/blog/1.jpg' %}" class="img-fluid" alt="">
+									</div>
+									<!-- Post Content -->
+									<div class="post-content">
+										<div class="post-title">
+											<a href="{{article.url}}" target="_blank"><h4>{{article.titre | capfirst}}</h4></a>
+										</div>
+										<div class="post-text">
+											<p>{{article.base | safe }}</p>
+										</div>
+										<div class="post-date"><span>{{article.created}}</span></div>
+										<a href="{{article.url}}" target="_blank" class="post-more">Read more</a>
+									</div>
+								</div>
+							</div>
+							<!-- New Item -->
+					
+					
+					{% endfor %}
+					
+					</div>
+				</div>
+			</div>
+
+			<!-- ========== End Blog ========== -->
+        
+{% endblock content %}
