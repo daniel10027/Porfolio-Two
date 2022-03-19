@@ -9,12 +9,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 
 
-import json
-from django.db import IntegrityError
-from django.http import JsonResponse
-from django.shortcuts import HttpResponse, HttpResponseRedirect, render
-from django.urls import reverse
-from django.views.decorators.csrf import csrf_exempt
+
 
 # Create your views here.
 def Home(request):
@@ -56,8 +51,3 @@ def Contact(request):
             return redirect('home')
         
         
-@csrf_exempt
-def commentaire(request):
-    data = json.loads(request.body)
-    print(data)
-    return JsonResponse({"Success" : f"Message envoyé"}, status=200)

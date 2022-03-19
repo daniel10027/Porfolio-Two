@@ -11,7 +11,7 @@
         <meta name="keywords" content="Html, Css, jQuery, JavaScript, Evet, responsive, onepage, personal, Portfolio, design, creative, template">
         
         <!-- Title -->
-        <title>Evet - Personal Portfolio</title>
+        <title>{{me.nom}} {{me.prenom}}</title>
         <!-- Favicon --> 
         <link rel="icon" href="{% static 'me/images//icon.png' %}">
         <!-- Google Fonts -->
@@ -338,7 +338,7 @@
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</p>
 								</div>
 								<div class="post-date"><span>{{article.created}}</span></div>
-								<a href="{{article.url}}" target="_blank" class="post-more">Voir</a>
+								<a href="{{article.url}}"  class="post-more">Voir</a>
 							</div>
 						</div>
 					</div>
@@ -347,7 +347,7 @@
 					
 					</div>
 					<div class="my-btn">
-						<a href="{% url 'articles' %}" target="_blank" class="main-btn">Tous les articles</a>
+						<a href="{% url 'articles' %}"  class="main-btn">Tous les articles</a>
 					</div>
 				</div>
 			</section>

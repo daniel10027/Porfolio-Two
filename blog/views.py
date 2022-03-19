@@ -7,6 +7,8 @@ from django.http import JsonResponse
 from django.shortcuts import HttpResponse, HttpResponseRedirect, render
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
+from .forms import CommentaireForm
+from django.db.models import Q
 
 
 class ArticleListView(ListView):
@@ -15,16 +17,13 @@ class ArticleListView(ListView):
     template_name = 'blog.html'
     context_object_name = 'articles'
   
-    # def get_queryset(self): # new
-    #     query = self.request.GET.get('q')
-    #     object_list = Produit.objects.filter(
-    #         Q(titre__icontains=query) | 
-    #         Q(categorie__titre__icontains=query) | 
-    #         Q(description__icontains=query) | 
-    #         Q(prix__icontains=query)
-    #     )
+    def get_queryset(self): # new
+        query = int(self.request.GET.get('q'))
+        object_list = Article.objects.filter(
+            Q(categorie=query) 
+        )
         
-    #     return object_list.order_by('-titre')
+        return object_list.order_by('-created')
 
     def get_context_data(self, **kwargs):
             context = super(ArticleListView, self).get_context_data(**kwargs)
@@ -69,22 +68,37 @@ class  ArticleDetailView(DetailView):
             context['trois'] = Article.objects.all()[:3]
             context['state'] = True
             return context
+        
+    def post(self, request, *args, **kwargs):
+        
+        form = CommentaireForm(request.POST)
+        
+        if form.is_valid():
+          
+            reply = form.save(commit=False)
+            reply.article = self.get_object()
+            reply.save()
+            self.object = self.get_object()
+            context = context = super().get_context_data(**kwargs)
+            context['form'] = CommentaireForm
+            context['message'] = "Commentaire ajouté"
+            context['categories'] = CategorieArticle.objects.all()
+            context['trois'] = Article.objects.all()[:3]
+            context['state'] = True
+            
 
-@csrf_exempt
-def Comment(request):
-    response_data = {}
-    nom = request.POST.get('nom')
-    article = request.POST.get('article')
-    commentaire = request.POST.get('commentaire')
+            return self.render_to_response(context=context)
 
-    response_data['nom'] = nom
-    response_data['commentaire'] = commentaire
-    print(response_data)
+        else:
+          
+            self.object = self.get_object()
+            context = super().get_context_data(**kwargs)
+            context['form'] = CommentaireForm
+            context['categories'] = CategorieArticle.objects.all()
+            context['trois'] = Article.objects.all()[:3]
+            context['state'] = True
 
-    commentaire.objects.create(
-            article=article,
-            nom = nom,
-            commentaire = commentaire,
-    )
-    return JsonResponse(response_data)
+            return self.render_to_response(context=context)
+
+
     

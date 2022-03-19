@@ -12,7 +12,7 @@
         <meta name="keywords" content="Html, Css, jQuery, JavaScript, Evet, responsive, onepage, personal, Portfolio, design, creative, template">
         
         <!-- Title -->
-        <title>Evet - Personal Portfolio</title>
+        <title>{{me.nom}} {{me.prenom}}</title>
         <!-- Favicon --> 
         <link rel="icon" href="{% static 'me/images/icon.png' %}">
         <!-- Google Fonts -->
@@ -84,6 +84,27 @@
                     <h2>Bienvenue sur le Blog</h2>
                         
                     {% endif %}
+
+                    
+                    {% if message %}
+
+                   
+                    <ul class="messages">
+                     
+                          <div class="container-fluid p-0">
+                            <div class="alert alert-success alert-dismissible" role="alert" >
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="True">&times;</span>
+                              </button>
+                              <h2>  {{ message }}</h2>
+                            </div>
+                          </div>
+                     
+                    </ul>
+                     {% endif %}
+                        
+                 
+                        
                         
 					<ul class="list-unstyled">
 						<li><a href="{% url 'home' %}">Accueil</a></li>
@@ -118,33 +139,17 @@
         <!-- Custom Js -->
         <script src="{% static 'me/js/custom.js' %}"></script>
 
-        
-<script>
-	console.log("Hello world")    
-    
-    <script>
-
-        document.querySelector("comment-form").addEventListener("click", event => {
-            event.preventDefault();
-
-            let formData = new FormData();
-            formData.append('nom', document.querySelector("#nom").value);
-            formData.append('article', document.querySelector("#article").value);
-            formData.append('commentaire', document.querySelector("#commentaire").value);
-
-            let csrfTokenValue = document.querySelector('[name=csrfmiddlewaretoken]').value;
-            console.log(formData)
-            
-            const request = new Request('{% url "commentaires" %}', {
-                method: 'POST',
-                body: formData,
-                headers: {'X-CSRFToken': csrfTokenValue}
+        <script>
+            $(document).ready(function() {
+                // show the alert
+                setTimeout(function() {
+                    $(".alert").alert('close');
+                }, 2000);
             });
-            fetch(request)
-                .then(response => response.json())
-        })
+              
         </script>
-</script>
+
+        
     </body>
 
 <!-- Mirrored from hasnaanajmi.com/env/Evet/blog.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Mar 2022 09:14:22 GMT -->
