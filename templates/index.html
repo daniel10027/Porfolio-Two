@@ -121,7 +121,7 @@
 											</a>
 										</li>
 									</ul>
-									<a href="#contact" class="main-btn d-sm-block">Contactez moi</a>
+									
 								</div>
 							</div>
 						</div>
@@ -292,7 +292,7 @@
 									<img class="img-fluid" src="{{p.images}}" height="600px" width="600px" alt="">
 									<div class="overlay">
 										<h4 class="item-title">{{p.titre | capfirst}}</h4>
-										<a class="icon-img" href="{{p.images}}" height="600px" width="600px" ><i class="fa fa-search-plus"></i></a>
+										<a href="{{p.images}}" class="icon-img"  data-toggle="modal" data-target="#exampleModal{{p.id}}" ><i class="fa fa-search-plus"></i></a>
 										<div class="item-category">
 											<span>{{p.categorie | capfirst}}</span>
 										</div>
@@ -422,6 +422,34 @@
 			<!-- ========== End Contact ========== -->
 			
 		</div>
+
+		{% for p in projets  %}
+
+
+		<div class="modal fade" id="exampleModal{{p.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel{{p.id}}" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel{{p.id}}">{{p.titre | capfirst}}</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				</div>
+				<div class="modal-body">
+					<p>{{p.description | safe }}</p>
+				
+				</div>
+				<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary"><a href="{{p.lien}}"style="color:white"  target="blank" >Voir le projet</a></button>
+				</div>
+			</div>
+			</div>
+		</div>
+		
+		
+		
+		{% endfor %}
         
         <!-- ========== Js ========== -->
 
@@ -437,6 +465,24 @@
         <script src="{% static 'me/js/jquery.magnific-popup.min.js' %}"></script>
         <!-- Custom Js -->
         <script src="{% static 'me/js/custom.js' %}"></script>
+
+		<script type="text/javascript">
+			(function () {
+				var options = {
+				   
+					whatsapp: "+225{{me.telephone_1}}", // WhatsApp number
+					call_to_action: "Contactez-moi", // Call to action
+					button_color: "#129BF4", // Color of button
+					position: "right", // Position may be 'right' or 'left'
+					order: "whatsapp", // Order of buttons
+				};
+				var proto = document.location.protocol, host = "getbutton.io", url = proto + "//static." + host;
+				var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
+				s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
+				var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+			})();
+		</script>
+
     </body>
 
 <!-- Mirrored from hasnaanajmi.com/env/Evet/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Mar 2022 09:13:59 GMT -->
